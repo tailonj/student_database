@@ -1,0 +1,41 @@
+
+public class FullTimeStudent extends Student{
+
+	private String major;
+	private String standing;
+	private int numOfCredits;
+	
+	public FullTimeStudent (String name, String address, String date, String major, String standing, int creditHours) {
+		super();
+		fullName = name;
+		fullAddress = address;
+		fullDate = date;
+		this.major = major;
+		this.standing = standing;
+		numOfCredits = creditHours;
+	}
+
+	public String getMajor() {
+		return major;
+	}
+
+	public void setMajor(String major) {
+		this.major = major;
+	}
+
+	public String getStanding() {
+		return standing;
+	}
+
+	public void setStanding(String standing) {
+		this.standing = standing;
+	}
+
+	public int getNumOfCredits() {
+		return  numOfCredits;
+	}
+
+	public void setNumOfCredits(int numOfCredits) {
+		numOfCredits = numOfCredits;
+	}
+}
