@@ -1,0 +1,417 @@
+/**
+ * @author Tai'Lon Jackson
+ * Assignment 7
+ */
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		 ArrayList<String[]> studentData = new ArrayList<String[]>();
+		 
+		 for (int k = 0; k < 100; k++) {
+			 
+		 	Scanner input = new Scanner(System.in);
+		 	
+			System.out.println("");
+
+			System.out.println("Enter the 1 if entering a full time student or enter 2 if entering a part-time student: ");
+			
+			int choice = input.nextInt();
+			
+			while (choice != 1 && choice != 2) { // Prevents blank space as input.
+				
+				System.out.println("Enter your choice of full time or part-time, either 1 or 2, no invalid entries are allowed: ");
+				
+				choice = input.nextInt();
+			}
+			
+				switch (choice) { //Part of a loop that allows user to choose the type of student before entering values
+			
+				case 1: 
+									
+						String[] fullStudent = getFullTimeStudent();
+				
+						Collections.addAll(studentData, fullStudent);
+		        
+						for (int i = 0; i < studentData.size(); i++)
+		        		
+							System.out.println(Arrays.toString(studentData.get(i)));
+						
+						break;
+					
+				case 2: 
+					
+						fullStudent = getPartTimeStudent();
+						
+				        Collections.addAll(studentData, fullStudent);
+				        
+				        for (int i = 0; i < studentData.size(); i++)
+				        		
+				        System.out.println(Arrays.toString(studentData.get(i)));
+					}
+			}
+			
+		
+	}
+
+	public static String[] getFullTimeStudent() { // returns an array with all attributes of a full time student
+		
+		//String credits = String.valueOf(creditHours());
+		
+		FullTimeStudent fStudent = new FullTimeStudent(name(), address(), date(), major(), standing(), creditHours());
+		
+		
+		String[] fullTimeStudent = {getStudentNumber(), "Student Name: " + fStudent.getFullName(), "Student Address: " + fStudent.getFullAddress(), 
+					"Student Enrollment Date: " + fStudent.getfullDate(), "Student Major: " + fStudent.getMajor(), 
+					fStudent.getStanding(), "Credits currently being taken: " + String.valueOf(fStudent.getNumOfCredits())};
+
+		return fullTimeStudent;
+		
+	}
+	
+	public static String[] getPartTimeStudent() { //// returns an array with all attributes of a part time student
+		
+		//String courses = String.valueOf(NumOfCourses());
+		
+		PartTimeStudent pStudent = new PartTimeStudent(name(), address(), date(), hasMajor(), NumOfCourses());
+		
+		String[] partTimeStudent = {getStudentNumber(), "Student Name: " + pStudent.getFullName(), "Student Address: " + pStudent.getFullAddress(), 
+				"Student Enrollment Date: " + pStudent.getfullDate(), "Has major: " + pStudent.HasMajor(), "Number of courses: " + String.valueOf(pStudent.getCourses())};
+
+		return partTimeStudent;
+		
+	}
+		
+	// The next set of code instantiates the classes and sets the first and last names.
+	
+	public static String name() {
+		
+	Scanner inputName = new Scanner(System.in);
+
+	System.out.println("Enter the students' first name: ");
+	
+	String firstName = inputName.nextLine().trim(); // Removes spaces so the while loop can function as a trap for entris that are just spaces.
+	
+	while (firstName.isEmpty()) { // Prevents blank space as input.
+		
+		System.out.println("Enter the students' first name, no blank entries are allowed: ");
+		
+		 firstName = inputName.nextLine().trim();
+	}	
+	
+	System.out.println("Enter the students' last name: ");
+	
+	String lastName = inputName.nextLine().trim();
+
+	while (lastName.isEmpty()) {
+		
+		System.out.println("Enter the students' last name, no blank entries are allowed: ");
+		
+		 lastName = inputName.nextLine().trim();
+	}
+		
+
+	String name = firstName + " " + lastName;
+	
+	return name;
+	
+	}
+	 // Creates full address to be added later to Employee array using getters.
+	
+	// The next set of code uses setters and getters to set and get the components of an address.
+	
+	
+	public static String address() {
+		
+	Scanner input = new Scanner(System.in);
+	
+	System.out.println("");
+
+	System.out.println("Next we'll enter the students' address. ");
+
+	System.out.println("");
+
+	System.out.println("Please start by entering the students' street name and number (if applicable): ");
+	
+	String street = input.nextLine().trim();
+	
+	while (street.isEmpty()) {
+		
+		System.out.println("");
+
+		System.out.println("Enter the students' street name and number (if applicable), no blank entries are allowed: ");
+		
+		 street = input.nextLine().trim();
+	}	
+	
+	System.out.println("");
+	
+	System.out.println("Please enter the students' city: ");
+
+	String city = input.nextLine().trim();
+	
+	while (city.isEmpty()) {
+		
+		System.out.println("Enter the students' city, no blank entries are allowed: ");
+		
+		city = input.nextLine().trim();
+	}	
+	
+	System.out.println("");
+	
+	System.out.println("Please enter the students' state using the two letter abbreviation: ");
+
+	String state = input.nextLine().trim();
+	
+	while (state.isEmpty()) {
+		
+		System.out.println("Enter the students' state, no blank entries are allowed: ");
+		
+		 state = input.nextLine().trim();
+	}
+	
+	while (state.length() != 2 ) {
+		
+		System.out.println("Enter the students' state using exactly the two letter abbreviation: ");
+		
+		 state = input.nextLine().trim();
+	}	
+	
+	System.out.println("");
+	
+	System.out.println("Please enter the students' five digit zip code: ");
+
+	int zipCode = input.nextInt();
+	
+	int zipLength = String.valueOf(zipCode).length();
+	
+	while (zipLength != 5 ) {
+		
+		System.out.println("Enter the students' five digit zip code. This must be exactly five digits: ");
+		
+		zipCode = input.nextInt();
+		
+		zipLength = String.valueOf(zipCode).length();
+	}
+						
+	//Combines all getters into a single variable for easy input into the Student array.
+	
+	String address = street + ", " + city + ", " + state + " " + zipCode;
+
+	return address;
+	
+	}
+	
+	public static String date() {
+		
+	Scanner input = new Scanner(System.in);
+		
+	// Next code gets the enrollment date in a similar manner as above.
+	
+	System.out.println("");
+	
+	System.out.println("Next we will enter the students' enrollement date starting with the day.");
+
+	System.out.println("");
+
+	System.out.println("Please enter the students' enrollement day, the number should be between 1 and 31. : ");
+
+	int day = input.nextInt();
+					
+	while (day < 1 || day > 31) {
+		
+	System.out.println("Enter the students' enrollement day, and keep the number between 1 and 31: ");
+	
+	day = input.nextInt();
+	
+	}	
+	
+	System.out.println("");
+	
+	System.out.println("Please enter the students' enrollement month, the number should be between 1 and 12: ");
+	
+	int month = input.nextInt();
+	
+	while (month < 1 || month > 12) {
+		
+	System.out.println("Enter the students' enrollement month, and keep the number between 1 and 12: ");
+	
+	month = input.nextInt();
+	
+	}
+					
+	System.out.println("");
+	
+	System.out.println("Please enter the students' enrollement year, the number should be 4 digits: ");
+	
+	int year = input.nextInt();
+	
+	while (year < 1925 || year > 2022) {
+		
+		System.out.println("Enter the students' year , all students' should have been enrolled after 1924 and before 2023: ");
+
+		year = input.nextInt();
+	}
+					
+	String enrollmentDate = month + "/" + day + "/" + year;
+	
+	return enrollmentDate; 
+	
+	}
+	
+public static String getStudentNumber() {//Creates unique Employee number.
+	
+		
+		int  a = (int)(1000 * Math.random());
+
+		int b = 1 + (int)(Math.random() * 10);
+		
+		String c = String.valueOf(a + b) ;
+		
+		return "Student ID Number: " + c;
+	
+}
+
+//Returns the major for use in the above mentioned array
+
+public static String major() {
+	
+	Scanner input = new Scanner(System.in);
+	
+	System.out.println("");
+
+	System.out.println("Enter the students' major: ");
+	
+	String majorName = input.nextLine().trim(); // Removes spaces so the while loop can function as a trap for entris that are just spaces.
+	
+	while (majorName.isEmpty() == true) { // Prevents blank space as input.
+		
+		System.out.println("Enter the students' major, no blank entries are allowed: ");
+		
+		majorName = input.nextLine().trim();
+	}
+	
+	
+	return majorName; 
+}
+
+//Returns the class standing for use in the above mentioned array
+
+public static String standing() {
+	
+	Scanner input = new Scanner(System.in);
+
+	String studentStanding = null;
+	
+	System.out.println("");
+	
+	System.out.println("Enter the students' school standing with numbers 1 - 4 ( 1 being freshman and 4 being senior): ");
+	
+	int standing = input.nextInt();
+	
+	while (standing < 1 || standing > 4) {
+		
+		System.out.println("Enter the students' school standing with numbers 1 - 4 ( 1 being freshman and 4 being senior): ");
+
+		standing = input.nextInt();
+	}
+	
+	switch (standing) {
+	
+	case 1: studentStanding = "Student Standing: Freshman"; break;
+	
+	case 2: studentStanding = "Student Standing: Sophomore"; break;
+	
+	case 3: studentStanding = "Student Standing: Junior"; break;
+	
+	case 4: studentStanding = "Student Standing: Senior"; break;
+
+	}
+	
+	
+	return studentStanding; 
+}
+
+//Returns the number of credit hours for use in the above mentioned array
+
+public static int creditHours() {
+	
+	Scanner input = new Scanner(System.in);
+
+	System.out.println("");
+	
+	System.out.println("Enter the students' nubmer of credit hours with numbers 1 - 18: ");
+	
+	int creditHours = input.nextInt();
+	
+	while (creditHours < 1 || creditHours > 18) {
+		
+		System.out.println("Enter the students' credit hours with numbers 1 - 18: ");
+
+		creditHours = input.nextInt();
+	}	
+	
+	//return "Credit Hours: " + 
+	return creditHours; 
+}
+
+//Returns the string for having a major 
+
+public static String hasMajor () {
+	
+	Scanner input = new Scanner(System.in);
+	
+	boolean major = false;
+	
+	System.out.println("");
+
+	System.out.println("Has the Part-Time sutudent declared a major? Please enter 1 for yes or 2 for no: ");
+	
+	int choice = input.nextInt(); // Take an int input to make the choices binary 
+
+		while (choice < 1 || choice > 2) {
+		
+		System.out.println("Enter the students' major status, using 1 or 2: ");
+		
+		 choice = input.nextInt();	
+		 						
+		 }
+		 if (choice == 1) {
+				
+				major = true;
+				
+				return "Yes";
+				
+			}
+				
+		return "No"; 				
+}
+
+// returns a string number of courses to put in the array
+
+public static int NumOfCourses() {
+	
+	Scanner input = new Scanner(System.in);
+
+	System.out.println("");
+	
+	System.out.println("Enter the students' number of courses with numbers 1 - 3: ");
+	
+	int NumOfCourses = input.nextInt();
+	
+	while (NumOfCourses < 1 || NumOfCourses > 3) {
+		
+		System.out.println("Enter the students' number of courses with numbers 1 - 3: ");
+
+		NumOfCourses = input.nextInt();
+	}	
+	
+	return NumOfCourses; 
+}
+}
