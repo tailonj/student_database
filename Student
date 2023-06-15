@@ -1,0 +1,39 @@
+public class Student {
+	protected String fullName;
+	protected String fullAddress;
+	protected String fullDate;
+	
+			 public Student () {
+				 				
+			}
+			 
+			 public void setFullName (String name) {
+				 
+				 fullName = "Name: " + name;				 
+			 }
+			 
+			 public String getFullName() {
+				 
+				 return fullName;
+			 }
+			 
+			 public void setFullAddress (String street, String city, String state, int zipCode) {
+				 
+					  fullAddress = "Address: " + street + ", " + city + ", " + state + ", " + zipCode;
+			 }
+			 
+			 public String getFullAddress() {
+				 
+				 return fullAddress;
+			 }
+			 
+			 public void setFullDate(int day, int month, int year) {
+				 
+				  fullDate = "Enrollement date:" + day + "/" + month + "/" + year;
+			 }
+			 
+			 public String getfullDate() {
+				 
+				 return fullDate;
+			 }
+	}
