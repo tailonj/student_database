@@ -1,0 +1,32 @@
+public class PartTimeStudent extends Student {
+
+	private String hasMajor;
+	private int courses;
+	
+		public PartTimeStudent (String name, String address, String date, String hasMajor, int courses) {
+			super();
+
+			fullName = name;
+			fullAddress = address;
+			fullDate = date;
+			this.hasMajor = hasMajor;
+			this.courses = courses;
+		}
+
+		public String HasMajor() {
+			return hasMajor;
+		}
+
+		public void setHasMajor(String hasMajor) {
+			this.hasMajor = hasMajor;
+		}
+
+		public int getCourses() {
+			return courses;
+		}
+
+		public void setCourses(int courses) {
+			this.courses = courses;
+		}
+		
+}
